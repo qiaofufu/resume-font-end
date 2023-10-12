@@ -1,0 +1,100 @@
+body {
+    height: 100vh;
+    padding: 10px 15px;
+    text-align: left;
+    align-items: center;
+    font-family: "Menlo", "Meslo LG", monospace;;
+}
+.info {
+    position: relative;
+    margin-bottom: 0;
+    display: flex;
+    align-items: end;
+    font-size: 16px;
+}
+
+.infoName {
+    color: white;
+    padding: 0 10px;
+    background-color: var(--primary-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 28px;
+}
+
+.infoPicture {
+    
+}
+
+.infoAge {
+    position: absolute;
+    right: 0;
+    color: white;
+    padding: 0 10px;
+    background-color: var(--primary-color);
+    /*border-top-left-radius: 5px;*/
+    /*border-top-right-radius: 5px;*/
+    line-height: 20px;
+}
+
+.infoGender {
+    /*position: absolute;*/
+    /*right: ;*/
+    color: white;
+    padding: 0 10px;
+    background-color: var(--primary-color);
+    /*border-top-left-radius: 5px;*/
+    border-top-right-radius: 5px;
+    line-height: 20px;
+}
+
+.contact {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contactItem {
+
+}
+
+
+/* 大标题 */
+.education h2 {
+    color: #61dafb;
+}
+
+/* icon */
+.education h2 i {
+    color: #282c34;
+}
+
+
+:root {
+    --primary-color: #4CAF50;
+    --accent-color: #8BC34A;
+    --background-color: #FFFFFF;
+    --text-color: #333333;
+}
+
+h2,
+h1 {
+    margin-bottom: 0;
+    display: flex;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color)
+}
+
+li {
+    margin: 10px;
+}
+
+
+hr {
+    color: var(--primary-color);
+    border-style: solid;
+    border-width: 2px;
+    margin-top: 0;
+}
