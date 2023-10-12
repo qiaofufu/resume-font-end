@@ -1,10 +1,17 @@
+@font-face {
+    font-family: "my-font-family";
+    src: url("MesloLGS-Regular.ttf");
+}
+
 body {
+    user-select: none;
     height: 100vh;
     padding: 10px 15px;
     text-align: left;
     align-items: center;
-    font-family: "Menlo", "Meslo LG", monospace;;
+    font-family: "my-font-family", "Menlo", "Meslo LG", monospace;;
 }
+
 .info {
     position: relative;
     margin-bottom: 0;
@@ -27,22 +34,20 @@ body {
 }
 
 .infoAge {
-    position: absolute;
-    right: 0;
-    color: white;
+    /*position: absolute;*/
+    /*right: 0;*/
+    color: var(--accent-color);
     padding: 0 10px;
-    background-color: var(--primary-color);
+    /*background-color: var(--primary-color);*/
     /*border-top-left-radius: 5px;*/
     /*border-top-right-radius: 5px;*/
     line-height: 20px;
 }
 
 .infoGender {
-    /*position: absolute;*/
-    /*right: ;*/
-    color: white;
+    color: var(--accent-color);
     padding: 0 10px;
-    background-color: var(--primary-color);
+    /*background-color: var(--primary-color);*/
     /*border-top-left-radius: 5px;*/
     border-top-right-radius: 5px;
     line-height: 20px;
@@ -54,20 +59,138 @@ body {
 }
 
 .contactItem {
+    display: flex;
+    align-content: center;
+}
+
+.contactItem i {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+
+.education {
+    /*background: red;*/
+}
+
+.educationItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.skill {
+    margin: 10px;
+}
+
+.skillItem {
+
+}
+
+.award {
+
+}
+
+.awardItem {
+
+}
+
+.awardItemTime {
+    background-color: rgb(243,244,244);
+    padding: 0 5px;
+    color: darksalmon;
+}
+
+.awardItemName {
+    padding-left: 10px;
+}
+
+.project {
+    position: relative;
+}
+
+.projectItem {
+
+}
+
+.projectItem h3 {
+    margin: 5px 0;
+}
+
+.projectItemHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectItemOverview {
+
+}
+
+.projectItemOverview p {
+    text-indent: 2em;
+}
+
+.projectItemResponsibility {
+    list-style-type: circle;
+}
+
+.projectItemSummary {
+    list-style-type: circle;
+}
+
+.projectItemDuration {
+    margin-left: 20px;
+}
+
+.projectItemDuration:before {
+    /*content: "项目时间:";*/
+}
+
+.projectItemRole {
+    margin-left: 20px;
+}
+
+.projectItemRole:before {
+    content: "担任角色:";
+}
+
+.projectItemLink {
+}
+
+.projectItemLink:before {
+    content:"项目地址:";
+    color: var(--text-color);
+}
+
+.experience {
 
 }
 
 
-/* 大标题 */
-.education h2 {
-    color: #61dafb;
+.experienceItem {
+
 }
 
-/* icon */
-.education h2 i {
-    color: #282c34;
+.experienceItemHeader {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
 }
 
+.experienceItemName {
+    font-weight: 800;
+}
+
+.experienceItemDuration {
+    font-weight: 400;
+}
+
+
+.experienceItemPosition {
+    font-weight: 400;
+}
 
 :root {
     --primary-color: #4CAF50;
@@ -78,6 +201,7 @@ body {
 
 h2,
 h1 {
+    margin-top: 5px;
     margin-bottom: 0;
     display: flex;
 }
@@ -97,4 +221,12 @@ hr {
     border-style: solid;
     border-width: 2px;
     margin-top: 0;
+}
+
+blockquote {
+    margin: 0;
+    border-left: 5px var(--accent-color) solid;
+    font-size: 18px;
+    background-color: rgb(255,249,249);
+    padding: 5px 10px;
 }

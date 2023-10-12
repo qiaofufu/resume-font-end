@@ -1,14 +1,21 @@
-export type Elem = ContactItem| UnorderList| ResponsibilityItem| ProjectItem| ExperienceItem| EducationItem| Info| Block
+export type Elem = ContactItem| SkillItem| ResponsibilityItem| ProjectItem| ExperienceItem| EducationItem| Info| Block | AwardItem
 
 export interface ContactItem {
     type: "contactItem";
     key: string;
+    link: string;
     value: string;
     icon: string;
 }
 
-export interface UnorderList {
-    type: "unorderList";
+export interface AwardItem {
+    type: "awardItem",
+    name: string,
+    time: string,
+}
+
+export interface SkillItem {
+    type: "skillItem";
     value: string;
 }
 
@@ -23,8 +30,9 @@ export interface ProjectItem {
     duration: string;
     role: string;
     overview: string;
+    link: string;
     responsibility: ResponsibilityItem[];
-    summary: string;
+    summary: ResponsibilityItem[];
 }
 
 export interface EducationItem {
@@ -32,6 +40,7 @@ export interface EducationItem {
     duration: string;
     name: string;
     degree: string;
+    major: string;
 }
 
 export interface ExperienceItem {
@@ -45,9 +54,6 @@ export interface ExperienceItem {
 export interface Info {
     type: string;
     name: string;
-    gender: string;
-    age: number;
-    picture: string;
 }
 
 export interface Block {
