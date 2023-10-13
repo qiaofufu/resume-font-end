@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import {Resume} from "./pages/Resume";
+import {Edit} from "./pages/edit/Edit";
+import {Test} from "./pages/Test";
 
 function App() {
   return (
-    <Resume></Resume>
+        // <Edit></Edit>
+      <Test/>
   );
 }
 

@@ -8,7 +8,7 @@
     "data": [
       {
         "type": "contactItem",
-        "key": "phone",
+        "key": "Phone",
         "value": "18547304726",
         "icon": "call"
       },
@@ -100,6 +100,10 @@
           {
             "type": "responsibilityItem",
             "value": "利用文件hash标记文件实现闪传,利用文件偏移实现断点续传, 将文件拆分并生成上传事务实现分块上传以及云存储适配接口等相关代码的开发"
+          },
+          {
+            "type": "responsibilityItem",
+            "value": "使用redis缓存数据, 同时利用singleflight机制避免缓存击穿, 利用一致性hash机制进行负载均衡, 提高服务的横向扩展能力"
           }
         ],
         "summary": [
@@ -109,7 +113,7 @@
           },
           {
             "type": "responsibilityItem",
-            "value": "本次开发我们选择fiber作为web框架, postgresql 作为数据库, redis 作为缓存以及文件分布锁, rabbitmq 作为异步队列和日志收集, 进一步巩固了中间件的使用"
+            "value": "本次开发我们选择fiber作为web框架, postgresql 作为数据库, redis 作为缓存以及文件分布式锁, rabbitmq 作为异步队列和日志收集, 进一步巩固了中间件的使用"
           }
         ]
       },

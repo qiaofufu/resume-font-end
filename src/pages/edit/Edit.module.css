@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    /*background: red;*/
+    background: rgb(240, 242, 245);
+}
+
+.resume {
+    margin: 20px;
+}
+
+.form {
+    margin: 20px;
+}
+
+.editBtn {
+    /*position: absolute;*/
+    font-size: 20px;
+    /*right: 26px;*/
+    /*top: 50%*/
+    /*padding: 10px;*/
+}
