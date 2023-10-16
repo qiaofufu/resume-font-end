@@ -1,11 +1,10 @@
-import  data from "../../data.json"
 import {Render} from "./Render";
 import {Elem} from "../model";
 
-export function Resume({className}:{className?:string}) {
-    let res = Render(data as Elem[])
+export function Resume(props:{className?:string, data:any}) {
+    let res = Render(props.data as Elem[])
     return (
-        <div className={className}>
+        <div className={props.className}>
             {res}
         </div>
     )

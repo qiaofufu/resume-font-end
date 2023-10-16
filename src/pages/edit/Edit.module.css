@@ -1,6 +1,7 @@
 .container {
     display: flex;
     position: relative;
+    height: 100%;
     justify-content: center;
     /*background: red;*/
     background: rgb(240, 242, 245);

@@ -1,70 +1,43 @@
-import {
-    closestCenter,
-    DndContext, MouseSensor, PointerSensor, useSensor, useSensors,
-} from "@dnd-kit/core";
-import {useState} from "react";
-import {Button, Card, Form as FormItem, Input} from "antd";
-import { Elem, Block} from "../model"
-import {
-    SortableContext,
-    useSortable,
-    verticalListSortingStrategy
-} from "@dnd-kit/sortable";
+import {closestCenter, DndContext, MouseSensor, PointerSensor, useSensor, useSensors,} from "@dnd-kit/core";
+import {useEffect, useRef, useState} from "react";
+import {Button, Card, Space} from "antd";
+import {Block, Elem} from "../model"
+import {SortableContext, useSortable, verticalListSortingStrategy} from "@dnd-kit/sortable";
 
 import styles from "./Form.module.css"
 import {IconFont} from "tdesign-icons-react";
 import {ContactForm} from "./component/ContactForm";
 import {InfoForm} from "./component/InfoForm";
+import {EducationForm} from "./component/EducationForm"
+import {SkillForm} from "./component/SkillForm";
+import {ProjectForm} from "./component/ProjectForm";
+import {ExperienceForm} from "./component/ExperienceForm";
+import {AwardFrom} from "./component/AwardFrom";
 
-interface Item {
+export interface Item {
     id: number,
     data: Elem
 }
 
-function renderElem(elem: Elem) {
-    switch (elem.type) {
-        case "info": {
-            return (
-                <InputContainer label={"基本信息"} >
-                   <InfoForm/>
-                </InputContainer>
-            )
-        }
-        case "contact": {
-            return (
-                <InputContainer label={"联系方式"}>
-                    <ContactForm/>
-                </InputContainer>
-            )
-        }
-    }
-}
 
-function InputContainer(props:any) {
-    return (
-        <Card
-            className={styles.inputContainer}
-        >
-            <div className={styles.inputHeader}>
-                <span>{props.label}</span>
-                <IconFont name={"move-1"}/>
-            </div>
-            {
-                props.children
-            }
-        </Card>
-    )
-}
-
-export function Form() {
+export function Form(props:{dataChange:(data:Elem[]) => void}) {
     const [items, setItems] = useState([] as Item[]);
+    const [cnt, setCnt] = useState(1)
+    const childDataRef = useRef<Item[]>();
+
+    useEffect(()=>{
+        const data =items.map(item => {
+            return item.data
+        })
+        props.dataChange(data)
+    }, [items])
+
     function add(data:Elem) {
         setItems((prevState) => {
-            const newItem = {id: prevState.length + 1, data: data}
-            const res = [...prevState, newItem] as Item[]
-            return res
+            const newItem = {id: cnt, data: data}
+            setCnt(cnt + 1)
+            return [...prevState, newItem] as Item[]
         })
-
     }
 
     function addBlock(type: string) {
@@ -81,15 +54,9 @@ export function Form() {
         })
     );
 
-    // 拖拽开始处理函数
-    function handleDragStart() {
-
-    }
-
     // 拖拽结束处理函数
     function handleDragEnd(event:any) {
         const {active, over} = event;
-        console.log(active.id, over.id);
         if (active.id !== over.id) {
             setItems((items) => {
                 const oldIndex = items.findIndex((elem)=>elem.id === active.id);
@@ -103,9 +70,28 @@ export function Form() {
         }
     }
 
+    function onChange(idx: number) {
+        return (elem:Elem) => {
+            setItems((items) => {
+                const newItems = [...items]
+                newItems[idx].data = elem
+                return newItems
+            })
+        }
+    }
+
+    function onDelete(idx: number) {
+        return () => {
+            setItems((items) => {
+                const newItems = [...items]
+                return [...newItems.slice(0,idx), ...newItems.slice(idx + 1)]
+            })
+        }
+    }
+
     return (
         <div>
-            <div>
+            <Space>
                 <Button onClick={addBlock("info")}>Info</Button>
                 <Button onClick={addBlock("contact")}>Contact</Button>
                 <Button onClick={addBlock("education")}>Education</Button>
@@ -113,19 +99,16 @@ export function Form() {
                 <Button onClick={addBlock("project")}>Project</Button>
                 <Button onClick={addBlock("experience")}>Experience</Button>
                 <Button onClick={addBlock("award")}>Award</Button>
-            </div>
+            </Space>
             <DndContext
                          collisionDetection={closestCenter}
                          onDragEnd={handleDragEnd}
-                         onDragStart={handleDragStart}
                          sensors={sensors}
             >
                 <SortableContext items={items}  strategy={verticalListSortingStrategy}>
-                    {items.map((elem) => (
-                        // We updated the Droppable component so it would accept an `id`
-                        // prop and pass it to `useDroppable`
+                    {items.map((elem, idx) => (
                         <SortItem key={elem.id} id={elem.id}>
-                            {renderElem(elem.data)}
+                            {renderElem(elem.data, onChange(idx), onDelete(idx))}
                         </SortItem>
                     ))}
                 </SortableContext>
@@ -135,6 +118,60 @@ export function Form() {
         </div>
 
     );
+}
+
+function renderElem(elem: Elem, onChange: (elem: Elem) => void, onDelete: () => void) {
+    switch (elem.type) {
+        case "info": {
+            return (
+                <InputContainer label={"基本信息"} onDelete={onDelete}>
+                    <InfoForm onChange={onChange}/>
+                </InputContainer>
+            )
+        }
+        case "contact": {
+            return (
+                <InputContainer label={"联系方式"} onDelete={onDelete}>
+                    <ContactForm onChange={onChange}/>
+                </InputContainer>
+            )
+        }
+        case "education": {
+            return (
+                <InputContainer label={"教育背景"} onDelete={onDelete}>
+                    <EducationForm onChange={onChange} />
+                </InputContainer>
+            )
+        }
+        case "skill": {
+            return (
+                <InputContainer label={"专业技能"} onDelete={onDelete}>
+                    <SkillForm onChange={onChange} />
+                </InputContainer>
+            )
+        }
+        case "project": {
+            return (
+                <InputContainer label={"项目经历"} onDelete={onDelete}>
+                    <ProjectForm onChange={onChange}/>
+                </InputContainer>
+            )
+        }
+        case "experience": {
+            return (
+                <InputContainer label={"工作/实习经历"} onDelete={onDelete}>
+                    <ExperienceForm onChange={onChange}/>
+                </InputContainer>
+            )
+        }
+        case "award": {
+            return (
+                <InputContainer label={"获奖情况"} onDelete={onDelete}>
+                    <AwardFrom onChange={onChange}/>
+                </InputContainer>
+            )
+        }
+    }
 }
 
 function SortItem(props:any) {
@@ -158,4 +195,20 @@ function SortItem(props:any) {
                 {props.children}
         </div>
     );
+}
+
+function InputContainer(props:any) {
+    return (
+        <Card
+            className={styles.inputContainer}
+        >
+            <div className={styles.inputHeader}>
+                <span>{props.label}</span>
+                <IconFont name={"move-1"} onClick={props.onDelete}/>
+            </div>
+            {
+                props.children
+            }
+        </Card>
+    )
 }

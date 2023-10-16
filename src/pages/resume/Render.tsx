@@ -11,10 +11,11 @@ import {
 } from "../model";
 
 import {IconFont} from 'tdesign-icons-react';
-import styles from "../Render.module.css"
+import styles from "./Render.module.css"
 
 
 export function Render(data:Elem[]) {
+    console.log(data)
     return data.map((elem) => {
             return render(elem)
         })
@@ -22,41 +23,46 @@ export function Render(data:Elem[]) {
 
 
 export function render(elem: Elem): JSX.Element {
-    switch (elem.type) {
-        case "info":
-            return renderInfo(elem as Info);
-        case "block":
-            return renderBlock(elem as Block, "block");
-        case "contact":
-            return renderBlock(elem as Block, styles.contact);
-        case "skill":
-            return renderBlock(elem as Block, styles.skill);
-        case "education":
-            return renderBlock(elem as Block, styles.education);
-        case "experience":
-            return renderBlock(elem as Block, styles.experience);
-        case "project":
-            return renderBlock(elem as Block, styles.project);
-        case "award":
-            return renderBlock(elem as Block, styles.award);
-        case "contactItem":
-            return renderContactItem(elem as ContactItem);
-        case "skillItem":
-            return renderSkillItem(elem as SkillItem);
-        case "responsibilityItem":
-            return renderResponsibilityItem(elem as ResponsibilityItem);
-        case "projectItem":
-            return renderProjectItem(elem as ProjectItem);
-        case "educationItem":
-            return renderEducationItem(elem as EducationItem);
-        case "experienceItem":
-            return renderExperienceItem(elem as ExperienceItem);
-        case "awardItem":
-            return renderAwardItem(elem as AwardItem);
-        default :
-            console.log(elem)
-            return (<div>Error</div>)
+    if (elem) {
+        switch (elem.type) {
+            case "info":
+                return renderInfo(elem as Info);
+            case "block":
+                return renderBlock(elem as Block, "block");
+            case "contact":
+                return renderBlock(elem as Block, styles.contact);
+            case "skill":
+                return renderBlock(elem as Block, styles.skill);
+            case "education":
+                return renderBlock(elem as Block, styles.education);
+            case "experience":
+                return renderBlock(elem as Block, styles.experience);
+            case "project":
+                return renderBlock(elem as Block, styles.project);
+            case "award":
+                return renderBlock(elem as Block, styles.award);
+            case "contactItem":
+                return renderContactItem(elem as ContactItem);
+            case "skillItem":
+                return renderSkillItem(elem as SkillItem);
+            case "responsibilityItem":
+                return renderResponsibilityItem(elem as ResponsibilityItem);
+            case "projectItem":
+                return renderProjectItem(elem as ProjectItem);
+            case "educationItem":
+                return renderEducationItem(elem as EducationItem);
+            case "experienceItem":
+                return renderExperienceItem(elem as ExperienceItem);
+            case "awardItem":
+                return renderAwardItem(elem as AwardItem);
+            default :
+                console.log(elem)
+                return (<div>Error</div>)
+        }
+    } else {
+        return <></>
     }
+
 }
 
 function renderContactItem(contactItem: ContactItem): JSX.Element {
@@ -158,7 +164,8 @@ function renderInfo(elem:Info) {
 }
 
 function renderBlock(block: Block, style: string): JSX.Element {
-    const outlet = block.data.map((item, index) => {
+
+    const outlet = block.data?.map((item, index) => {
         return (
             <div key={index}>
                 {render(item)}

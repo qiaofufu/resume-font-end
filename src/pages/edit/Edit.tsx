@@ -2,8 +2,9 @@ import {Resume} from "../resume/Resume";
 import styles from  "./Edit.module.css"
 import {Button, Card, Drawer, FloatButton, Space} from "antd";
 import {IconFont} from "tdesign-icons-react";
-import {useState} from "react";
-import {Form} from "../form/Form";
+import {useRef, useState} from "react";
+import {Form, Item} from "../form/Form";
+import {Elem} from "../model";
 
 export function Edit() {
     const [show, setShow] = useState(false)
@@ -16,6 +17,17 @@ export function Edit() {
         setShow(true)
     }
 
+    const [childData, setChildData] = useState<Elem[]>([]);
+
+    const handleChildDataChange = (newData:Elem[]) => {
+        setChildData(newData);
+    };
+    
+    function handleSubmit() {
+        console.log(childData)
+    }
+
+
     return (
         <div className={styles.container}>
             <Drawer
@@ -26,16 +38,17 @@ export function Edit() {
                 extra={
                     <Space>
                         <Button>Cancel</Button>
-                        <Button type={"primary"}>Submit</Button>
+                        <Button type={"primary"} onClick={handleSubmit}>Submit</Button>
                     </Space>
                 }
             >
-                <Card>
-                   <Form/>
+                <Card className={styles.resume} hoverable>
+                    <Resume data={childData}/>
                 </Card>
+
             </Drawer>
-            <Card className={styles.resume} hoverable>
-                <Resume/>
+            <Card className={styles.form}>
+                <Form dataChange={handleChildDataChange}/>
             </Card>
             <FloatButton className={styles.editBtn} shape={"square"} icon={<IconFont name={"edit-2"}/>} tooltip={<div>Edit resume</div>} onClick={showDrawer}></FloatButton>
         </div>
