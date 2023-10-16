@@ -1,0 +1,25 @@
+.inputContainer {
+
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.inputHeader {
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.inputHeader i {
+    /*margin: 10px;*/
+    /*font-size: 20px;*/
+    text-align: right;
+    /*border: solid;*/
+    color: #6f6f6f;
+    /*position: relative;*/
+    /*right: 0;*/
+    /*float: right;*/
+}
+

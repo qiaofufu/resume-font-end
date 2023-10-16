@@ -8,10 +8,10 @@ import {
     Info,
     ProjectItem,
     ResponsibilityItem, SkillItem,
-} from "./model";
+} from "../model";
 
 import {IconFont} from 'tdesign-icons-react';
-import styles from "./Render.module.css"
+import styles from "../Render.module.css"
 
 
 export function Render(data:Elem[]) {

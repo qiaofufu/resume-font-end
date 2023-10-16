@@ -1,6 +1,6 @@
-import  data from "../data.json"
+import  data from "../../data.json"
 import {Render} from "./Render";
-import {Elem} from "./model";
+import {Elem} from "../model";
 
 export function Resume({className}:{className?:string}) {
     let res = Render(data as Elem[])

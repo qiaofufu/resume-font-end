@@ -5,6 +5,7 @@
   },
   {
     "type": "contact",
+    "name": "联系方式",
     "data": [
       {
         "type": "contactItem",

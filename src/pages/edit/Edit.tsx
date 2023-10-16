@@ -1,9 +1,9 @@
-import {Resume} from "../Resume";
+import {Resume} from "../resume/Resume";
 import styles from  "./Edit.module.css"
 import {Button, Card, Drawer, FloatButton, Space} from "antd";
 import {IconFont} from "tdesign-icons-react";
 import {useState} from "react";
-import {Forms} from "./Form";
+import {Form} from "../form/Form";
 
 export function Edit() {
     const [show, setShow] = useState(false)
@@ -20,7 +20,7 @@ export function Edit() {
         <div className={styles.container}>
             <Drawer
                 placement={"left"}
-                width={"40%"}
+                width={"50%"}
                 onClose={onClose}
                 open={show}
                 extra={
@@ -31,7 +31,7 @@ export function Edit() {
                 }
             >
                 <Card>
-                   <Forms/>
+                   <Form/>
                 </Card>
             </Drawer>
             <Card className={styles.resume} hoverable>
